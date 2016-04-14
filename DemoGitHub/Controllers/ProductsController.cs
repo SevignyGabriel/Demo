@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoGitHub.Models;
+using System.IO;
 
 namespace DemoGitHub.Controllers
 {
@@ -60,6 +61,18 @@ namespace DemoGitHub.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        var fileExtension = Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/Images/"), fileName + fileExtension);
+                        file.SaveAs(path);
+                        products.Photo = fileName + fileExtension;
+                    }
+                }
                 db.Products.Add(products);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,6 +109,18 @@ namespace DemoGitHub.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        var fileExtension = Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/Images/"), fileName + fileExtension);
+                        file.SaveAs(path);
+                        products.Photo = fileName + fileExtension;
+                    }
+                }
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

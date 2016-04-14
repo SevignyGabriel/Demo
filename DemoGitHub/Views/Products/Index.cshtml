@@ -5,7 +5,6 @@
 }
 
 <h2>Index</h2>
-
 @using (Html.BeginForm("Index", "Products", FormMethod.Post))
 {
     @Html.ActionLink("Create New", "Create")
@@ -74,8 +73,13 @@
             @Html.DisplayFor(modelItem => item.Discontinued)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Photo)
-        </td>
+            @*@Html.DisplayFor(modelItem => item.Photo)*@
+            @if (@item.Photo == null)
+            {
+                <img src="@Path.Combine("~/App_Data/Images/", "no_image.png")" alt="Product image" />
+            } else {
+                <img src="@Path.Combine("~/App_Data/Images/", @item.Photo)" alt="Product image" />
+            }
         <td>
             @Html.DisplayFor(modelItem => item.Categories.CategoryName)
         </td>
@@ -89,5 +93,4 @@
         </td>
     </tr>
 }
-
 </table>
