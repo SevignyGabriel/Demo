@@ -5,15 +5,29 @@
 }
 
 <h2>Index</h2>
+<<<<<<< HEAD
 @using (Html.BeginForm("Index", "Products", FormMethod.Post))
 {
+=======
+
+<p>
+>>>>>>> 2333c937be7f243cbe81203d0d9c5a0f4184feb7
     @Html.ActionLink("Create New", "Create")
-    <input type="submit" value="Filter" style="float: right;" />
-    <input type="text" name="filter" placeholder="Enter a product name" style="float: right;" />
-}
-<br />
-<br />
-<br />
+    @using (Html.BeginForm("Index", "Products", FormMethod.Post))
+    {
+        <input type="submit" style="float:right" />
+        <input type="text" name="request" placeholder="Entrer recherche" style="float:right" />      
+        <select name="category">
+            <option value="all">all</option>
+            @foreach (SelectListItem i in ViewBag.CategoryID)
+            {
+                <option>@i.Text.ToString()</option>
+            }
+        </select>
+
+    }
+</p>
+
 <table class="table">
     <tr>
         <th>
